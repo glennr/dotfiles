@@ -60,4 +60,4 @@ alias hou='cd c/hound'
 alias vng='cd c/vng'
 alias m='mvim .'
 alias siy='cd c/siyelo'
-
+alias hrt='cd ~/c/hrt'
