@@ -5,7 +5,8 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="mgutz"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -30,10 +31,6 @@ plugins=(vi-mode annotate brew bundler gem git git-gr git-heroku github heroku h
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/Users/glennr/Scripts:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:$PATH
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
 
 ### Faves
 #export EDITOR='mate -w'
@@ -63,3 +60,4 @@ alias hou='cd c/hound'
 alias vng='cd c/vng'
 alias m='mvim .'
 alias siy='cd c/siyelo'
+
