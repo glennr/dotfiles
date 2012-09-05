@@ -1,0 +1,11 @@
+# search all text files (incl executables)
+#--type=text
+--ignore-dir=.git
+--type-add=ruby=.haml,.gems,.rdoc,.sass,.feature,.spec,.rake,.md
+--type-set=bin=.pdf
+#--type-set=bin=.pdf,.png,.svg,.swf,.eot,.ttf,.woff,.ico,.gif,.jpg
+#--nobin
+# Use "less -r" as my pager
+#--pager=less -r
+
+

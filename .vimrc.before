@@ -1,0 +1,2 @@
+" GRO: remap leader
+let mapleader = ","

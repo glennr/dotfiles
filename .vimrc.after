@@ -1,0 +1,44 @@
+" solarized scheme
+syntax enable
+set background=dark
+colorscheme solarized
+
+" change font
+set guifont=Inconsolata:h18
+
+" GRO: remap leader
+let mapleader = ","
+
+" NERDTree configuration
+let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
+map <Leader>n :NERDTreeToggle<CR>
+
+" open in nerdtree
+"nnoremap <silent> <C-f> :call FindInNERDTree()<CR>
+
+let NERDTreeShowHidden=1
+
+" Command-T configuration
+"let g:CommandTMaxHeight=20
+
+
+" Default color scheme
+" color desert
+
+" Strip trailing whitespace
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+" http://stackoverflow.com/questions/849084/what-fold-should-i-use-in-vim
+"set foldmethod=syntax
+"set foldlevel=3
