@@ -27,7 +27,7 @@ DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
 # vi-mode interferes with history-substring-search
-plugins=(vi-mode annotate brew bundler gem git git-gr git-heroku github heroku heroku-gr history-substring-search hrt rails rails3 rails-gr rbenv ruby)
+plugins=(vi-mode annotate brew bundler gem git git-on-roids github heroku heroku-on-roids history-substring-search rails rails-on-roids rails3 rbenv ruby)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
