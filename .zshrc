@@ -32,12 +32,13 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
+export PATH=~/bin:$PATH
 ### Faves
 #export EDITOR='mate -w'
-export EDITOR='mvim'
-export GIT_EDITOR='mate -wl1'. #This instructs TextMate to open with the caret at line 1 rather than where it last was.
+export EDITOR='vi'
+#export GIT_EDITOR='mate -wl1'. #This instructs TextMate to open with the caret at line 1 rather than where it last was.
 #export GIT_EDITOR='mvim -f'.
-export SVN_EDITOR=vim
+#export SVN_EDITOR=vim
 setopt hist_ignore_all_dups
 
 #FUCK YOU AUTOCORRECT
