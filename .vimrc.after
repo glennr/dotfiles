@@ -81,3 +81,8 @@ autocmd BufWritePre * :call <SID>ReTab()
 " http://stackoverflow.com/questions/849084/what-fold-should-i-use-in-vim
 "set foldmethod=syntax
 "set foldlevel=3
+"
+
+" show long lines
+" match ErrorMsg '\%>120v.\+'
+set colorcolumn=120

@@ -62,3 +62,6 @@ alias vng='cd c/vng'
 alias m='mvim .'
 alias siy='cd c/siyelo'
 alias hrt='cd ~/c/hrt'
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
