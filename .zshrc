@@ -57,11 +57,10 @@ unsetopt correct_all
 #I  don't like the zsh builtin time command.
 [[ -x =time ]] && alias time='command time'
 
-alias hou='cd c/hound'
-alias vng='cd c/vng'
 alias m='mvim .'
-alias siy='cd c/siyelo'
-alias hrt='cd ~/c/hrt'
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+#coreutils
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
