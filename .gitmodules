@@ -1,6 +1,9 @@
 [submodule ".janus/vim-tomorrow-theme"]
-	path = .janus/vim-tomorrow-theme
-	url = git://github.com/chriskempson/vim-tomorrow-theme.git
+  path = .janus/vim-tomorrow-theme
+  url = git://github.com/chriskempson/vim-tomorrow-theme.git
 [submodule ".janus/zenburn"]
-	path = .janus/zenburn
-	url = git://github.com/vim-scripts/Zenburn.git
+  path = .janus/zenburn
+  url = git://github.com/vim-scripts/Zenburn.git
+[submodule ".janus/bundle/handlebars"]
+	path = .janus/bundle/handlebars
+	url = git://github.com/nono/vim-handlebars.git
