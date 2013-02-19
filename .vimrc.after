@@ -1,43 +1,13 @@
-" solarized scheme
-"syntax enable
-"set background=dark
 "colorscheme solarized
-"color desert
-"color molokai
-"color jellybeans
+"color tomorrow
+"color tomorrow-night
+
+"higher contrast for zenburn
+"let g:zenburn_high_Contrast=1
+color zenburn
 
 " change font
 set guifont=Inconsolata:h18
-
-" GUI
-"
-if has("gui_running")
-  set t_Co=256
-  colorscheme solarized
-  set guitablabel=%M%t
-  set lines=40
-  set columns=115
-
-  if has("gui_gnome")
-    set guifont=Inconsolata\ 13
-  endif
-
-  if has("gui_mac") || has("gui_macvim")
-    set guifont=Menlo:h14
-  endif
-else
-  let g:CSApprox_loaded = 1
-  autocmd InsertEnter,InsertLeave * set cul!
-  if $COLORTERM == 'gnome-terminal'
-    set term=gnome-256color
-    colorscheme railscasts
-  else
-    let g:solarized_termcolors=256
-    set background=dark
-    colorscheme solarized
-  endif
-endif
-
 
 " GRO: remap leader
 let mapleader = ","
@@ -50,13 +20,6 @@ map <Leader>n :NERDTreeToggle<CR>
 "nnoremap <silent> <C-f> :call FindInNERDTree()<CR>
 
 let NERDTreeShowHidden=1
-
-" Command-T configuration
-"let g:CommandTMaxHeight=20
-
-
-" Default color scheme
-" color desert
 
 " Strip trailing whitespace
 function! <SID>StripTrailingWhitespaces()
@@ -78,11 +41,6 @@ function! <SID>ReTab()
 endfunction
 autocmd BufWritePre * :call <SID>ReTab()
 
-" http://stackoverflow.com/questions/849084/what-fold-should-i-use-in-vim
-"set foldmethod=syntax
-"set foldlevel=3
-"
-
 " show long lines
-" match ErrorMsg '\%>120v.\+'
 set colorcolumn=120
+
