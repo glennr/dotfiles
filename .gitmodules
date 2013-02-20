@@ -1,15 +1,18 @@
+[submodule ".janus/bundle/handlebars"]
+  path = .janus/bundle/handlebars
+  url = git://github.com/nono/vim-handlebars.git
+[submodule ".janus/html5.vim"]
+  path = .janus/html5.vim
+  url = git://github.com/othree/html5.vim.git
+[submodule ".janus/vim-ruby-refactoring"]
+  path = .janus/vim-ruby-refactoring
+  url = git://github.com/ecomba/vim-ruby-refactoring.git
+[submodule ".janus/vim-powerline"]
+  path = .janus/vim-powerline
+  url = git://github.com/Lokaltog/vim-powerline.git
 [submodule ".janus/vim-tomorrow-theme"]
   path = .janus/vim-tomorrow-theme
   url = git://github.com/chriskempson/vim-tomorrow-theme.git
 [submodule ".janus/zenburn"]
-  path = .janus/zenburn
-  url = git://github.com/vim-scripts/Zenburn.git
-[submodule ".janus/bundle/handlebars"]
-	path = .janus/bundle/handlebars
-	url = git://github.com/nono/vim-handlebars.git
-[submodule ".janus/html5.vim"]
-	path = .janus/html5.vim
-	url = git://github.com/othree/html5.vim.git
-[submodule ".janus/vim-ruby-refactoring"]
-	path = .janus/vim-ruby-refactoring
-	url = git://github.com/ecomba/vim-ruby-refactoring.git
+	path = .janus/zenburn
+	url = git://github.com/vim-scripts/Zenburn.git
