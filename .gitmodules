@@ -7,3 +7,6 @@
 [submodule ".janus/bundle/handlebars"]
 	path = .janus/bundle/handlebars
 	url = git://github.com/nono/vim-handlebars.git
+[submodule ".janus/html5.vim"]
+	path = .janus/html5.vim
+	url = git://github.com/othree/html5.vim.git
