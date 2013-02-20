@@ -10,3 +10,6 @@
 [submodule ".janus/html5.vim"]
 	path = .janus/html5.vim
 	url = git://github.com/othree/html5.vim.git
+[submodule ".janus/vim-ruby-refactoring"]
+	path = .janus/vim-ruby-refactoring
+	url = git://github.com/ecomba/vim-ruby-refactoring.git
