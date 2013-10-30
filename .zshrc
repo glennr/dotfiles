@@ -27,7 +27,7 @@ DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
 # vi-mode interferes with history-substring-search
-plugins=(vi-mode annotate brew bundler gem git git-on-roids github heroku heroku-on-roids history-substring-search rails rails-on-roids rails3 rbenv ruby)
+plugins=(vi-mode annotate brew bundler gem git git-on-roids github heroku heroku-on-roids history-substring-search rails rails-on-roids rails3 rbenv ruby tmux)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
@@ -64,3 +64,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 #coreutils
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
+#tmux
+alias tmux="TERM=screen-256color-bce tmux"

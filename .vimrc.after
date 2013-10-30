@@ -50,7 +50,7 @@ endfunction
 autocmd BufWritePre * :call <SID>ReTab()
 
 " show long lines
-set colorcolumn=120
+set colorcolumn=132
 
 "smart movement over long lines
 nmap j gj
@@ -80,3 +80,4 @@ nmap k gk
 " " Switch between buffers
 noremap <tab> :bn<CR>
 noremap <S-tab> :bp<CR>
+
