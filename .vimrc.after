@@ -81,3 +81,14 @@ nmap k gk
 noremap <tab> :bn<CR>
 noremap <S-tab> :bp<CR>
 
+" silver searcher
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+"ESC is too far
+inoremap jj <Esc>
+
+" Open last buffer
+noremap <Leader><Leader> <C-^>
+
+"easymotion leader key
+let g:EasyMotion_leader_key = '<space>'
