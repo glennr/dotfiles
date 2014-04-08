@@ -32,7 +32,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
-export PATH=~/bin:$PATH
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:$PATH
 ### Faves
 #export EDITOR='mate -w'
 export EDITOR='vi'
@@ -67,3 +67,6 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
 #tmux
 alias tmux="TERM=screen-256color-bce tmux"
+
+#
+PROMPT='%n@%m %{$fg_bold[magenta]%}%1~$(git_prompt_info) %{$fg_bold[magenta]%}%# %{$reset_color%}'
