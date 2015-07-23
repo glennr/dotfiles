@@ -46,7 +46,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-on-roids ruby golang gem history history-substring-search terminalapp brew vi-mode rbenv bundler rails-on-roids)
+plugins=(git ruby golang gem history history-substring-search terminalapp brew vi-mode rbenv bundler )
 
 # User configuration
 
