@@ -1,7 +1,7 @@
 
-source ./dotfiles-local/aliases/git-on-roids
-source ./dotfiles-local/aliases/heroku-on-roids
+source ~/dotfiles-local/alias_groups/git-on-roids
+source ~/dotfiles-local/alias_groups/heroku-on-roids
 
 # Railsy stuff
-source ./dotfiles-local/aliases/rails-on-roids
-source ./dotfiles-local/aliases/annotate
+source ~/dotfiles-local/alias_groups/rails-on-roids
+source ~/dotfiles-local/alias_groups/annotate
