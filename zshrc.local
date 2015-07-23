@@ -46,7 +46,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby golang gem history history-substring-search terminalapp brew vi-mode rbenv bundler )
+plugins=(git ruby golang gem history history-substring-search terminalapp brew rbenv bundler )
 
 # User configuration
 
@@ -95,6 +95,7 @@ export GOPATH=/Users/glennr/go/code/go
 export PATH=$GOBIN:$PATH
 
 setopt hist_ignore_all_dups
+
 #FUCK YOU AUTOCORRECT
 unsetopt correct_all
 
@@ -110,3 +111,5 @@ export PATH=$PHPBIN:$PATH
 # haskellness
 export PATH=~/Library/Haskell/bin:$PATH
 export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+
+set -o vi
