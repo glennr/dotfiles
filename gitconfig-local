@@ -1,0 +1,7 @@
+[color]
+	ui = true
+[user]
+	name = Glenn Roberts
+	email = glenn@siyelo.com
+[url "git@github.com:"]
+	insteadOf = https://github.com/
