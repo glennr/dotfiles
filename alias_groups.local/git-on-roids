@@ -35,3 +35,6 @@ alias griom='git rebase -i origin/master'
 alias gpom='git push origin master'
 alias gpsm='git push staging master:master'
 alias gppm='git push production master:master'
+
+# cleanup merged branches
+alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
