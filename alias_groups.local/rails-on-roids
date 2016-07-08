@@ -57,3 +57,9 @@ alias cfg='cucumber features --tag @green'
 alias cfs='cucumber features -p selenium'
 alias cfsr='cucumber features -p selenium --tag @run'
 alias cff='cucumber features && cucumber features -p selenium'
+
+# Delayed job
+alias rjw='rake jobs:work'
+
+alias rqa='rake quality:all'
+

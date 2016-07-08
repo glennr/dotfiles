@@ -26,15 +26,15 @@ alias gprune='git remote prune origin'
 alias gk='gitk &'
 alias gx='gitx'
 
-alias gfp='git fetch production'
+alias gfp='git fetch prod'
 alias gfs='git fetch staging'
-alias gfa='gfs && gfs'
+alias gfa='gfs && gfp'
 
 alias grom='git rebase origin/master'
 alias griom='git rebase -i origin/master'
 alias gpom='git push origin master'
 alias gpsm='git push staging master:master'
-alias gppm='git push production master:master'
+alias gppm='git push prod master:master'
 
 # cleanup merged branches
 alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'

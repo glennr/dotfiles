@@ -124,3 +124,6 @@ bindkey -M vicmd 'j' history-substring-search-down
 set -o vi
 
 export PATH="/usr/local/sbin:$PATH"
+
+# Elixirrr
+export PATH="$PATH:/path/to/elixir/bin"

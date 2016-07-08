@@ -5,3 +5,6 @@ source ~/.alias_groups.local/heroku-on-roids
 # Railsy stuff
 source ~/.alias_groups.local/rails-on-roids
 source ~/.alias_groups.local/annotate
+
+alias s='subl'
+alias s.='subl .'
