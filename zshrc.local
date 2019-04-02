@@ -127,3 +127,15 @@ export PATH="/usr/local/sbin:$PATH"
 
 # Elixirrr
 export PATH="$PATH:/path/to/elixir/bin"
+
+# Node
+export PATH="./node_modules/.bin:$PATH"
+
+# Groove docker
+eval "$(docker-machine env dinghy)"
+
+# Groove scripts
+export PATH="/Users/glennr/src/groove/stack/bin:$PATH"
+
+# Groove APP scripts
+export PATH="./bin:./script:$PATH"
