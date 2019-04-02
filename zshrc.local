@@ -65,6 +65,11 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
+# Launch nvim not vim.
+if type nvim > /dev/null 2>&1; then
+  alias vim='nvim'
+fi
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -125,6 +130,8 @@ set -o vi
 
 export PATH="/usr/local/sbin:$PATH"
 
+
+
 # Elixirrr
 export PATH="$PATH:/path/to/elixir/bin"
 
@@ -139,3 +146,5 @@ export PATH="/Users/glennr/src/groove/stack/bin:$PATH"
 
 # Groove APP scripts
 export PATH="./bin:./script:$PATH"
+
+
