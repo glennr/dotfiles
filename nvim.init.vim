@@ -8,7 +8,6 @@ Plug 'airblade/vim-gitgutter'
 " OMG - insanely awesome fuzzy search and blazing fast grep
 Plug 'cloudhead/neovim-fuzzy'
 
-
 " Ack-grep
 "Plug 'gabesoft/vim-ags'
 " Faster than Ack-grep
