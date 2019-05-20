@@ -25,10 +25,34 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 
+""" Elixir goodies
 
+" To get the documentation for the item under your cursor, just hit K.
+" Press C-] on `Guardian.Plug.VerifyHeader` for example
+Plug 'slashmili/alchemist.vim'
+
+" Autoformat .ex files
+Plug 'mhinz/vim-mix-format'
+let g:mix_format_on_save = 1
+"let g:mix_format_silent_errors = 1
+"
+" autoformat elixir files
+"autocmd BufWritePost *.exs,*.ex silent :!mix format %
+"
 "Plug 'sbdchd/neoformat'
 Plug 'sheerun/vim-polyglot'
 
+" Execute code checks, find mistakes, in the background
+Plug 'neomake/neomake'
+
+" Run Neomake when I save any buffer
+augroup localneomake
+  autocmd! BufWritePost * Neomake
+augroup END
+" Don't tell me to use smartquotes in markdown ok?
+let g:neomake_markdown_enabled_makers = []
+" https://www.smoothterminal.com/articles/neovim-for-elixir
+let g:neomake_elixir_enabled_makers = ['mix', 'credo']
 
 Plug 'Yggdroot/indentLine'
 " custom inconsolata font file with dotted lines.
