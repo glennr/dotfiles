@@ -31,3 +31,6 @@ alias st=stree
 
 alias cat=bat
 
+alias fe="cd ~/src/groove/stack/mobile-frontend;"
+alias api="cd ~/src/groove/stack/app"
+alias gql="cd ~/src/groove/stack/graphql-gateway"
