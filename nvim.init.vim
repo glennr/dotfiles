@@ -79,7 +79,10 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Autocomplete with deoplete.
 " https://github.com/Shougo/deoplete.nvim/issues/550
-let g:python3_host_prog  = '/usr/local/Cellar/python3/3.7.0/bin/python3'
+if has('macunix')
+  let g:python3_host_prog  = '/usr/local/Cellar/python3/3.7.0/bin/python3'
+endif
+
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
