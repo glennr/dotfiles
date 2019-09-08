@@ -145,8 +145,5 @@ fi
 # Groove scripts
 export PATH="/Users/glennr/src/groove/stack/bin:$PATH"
 
-# Groove APP scripts
-export PATH="./bin:./script:$PATH"
-
 source ~/.bin/tmuxinator.zsh
 
