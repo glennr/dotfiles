@@ -86,7 +86,7 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+#export PATH="/usr/local/heroku/bin:$PATH"
 
 export PATH="$HOME/bin:$PATH"
 
@@ -129,7 +129,6 @@ bindkey -M vicmd 'j' history-substring-search-down
 set -o vi
 
 export PATH="/usr/local/sbin:$PATH"
-
 
 # Elixirrr
 export PATH="$PATH:/path/to/elixir/bin"

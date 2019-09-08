@@ -21,7 +21,7 @@ alias ewbr="ewb bundle exec rspec"
 
 alias eds="ey deploy -e staging -R"
 
-alias git=hub
+#alias git=hub
 alias gprq="git pull-request"
 
 alias gcot='git co -t origin/'
