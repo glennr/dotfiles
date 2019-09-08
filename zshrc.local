@@ -142,8 +142,8 @@ if [[ `uname` == "Darwin" ]]; then
 fi
 
 # Groove scripts
-export PATH="/Users/glennr/src/groove/stack/bin:$PATH"
-export PATH="/Users/glennr/src/groove/stack/script:$PATH"
+export PATH="~/src/groove/stack/bin:$PATH"
+export PATH="~/src/groove/stack/script:$PATH"
 
 source ~/.bin/tmuxinator.zsh
 
