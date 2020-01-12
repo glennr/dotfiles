@@ -90,6 +90,9 @@ fi
 
 export PATH="$HOME/bin:$PATH"
 
+# Yarn binaries
+export PATH="$HOME/.yarn/bin:$PATH"
+
 #export GOROOT=/Users/glennr/go
 #export GOOS=darwin
 #export GOARCH=amd64
@@ -142,8 +145,10 @@ if [[ `uname` == "Darwin" ]]; then
 fi
 
 # Groove scripts
-export PATH="~/src/groove/stack/bin:$PATH"
-export PATH="~/src/groove/stack/script:$PATH"
+export PATH="/home/g/src/groove/stack/bin:$PATH"
+export PATH="/home/g/src/groove/stack/script:$PATH"
+export PATH="/home/g/src/groove/stack/mobile-frontend/node_modules/.bin:$PATH"
+export PATH="/home/g/src/groove/stack/app/script:$PATH"
 
 source ~/.bin/tmuxinator.zsh
 
