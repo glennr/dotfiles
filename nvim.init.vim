@@ -29,7 +29,11 @@ Plug 'prettier/vim-prettier', {
 
 " To get the documentation for the item under your cursor, just hit K.
 " Press C-] on `Guardian.Plug.VerifyHeader` for example
-Plug 'slashmili/alchemist.vim'
+" Plug 'slashmili/alchemist.vim'
+Plug 'elixir-editors/vim-elixir' "moar popular
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" then :CocInstall coc-elixir
 
 " Autoformat .ex files
 Plug 'mhinz/vim-mix-format'
@@ -46,13 +50,13 @@ Plug 'sheerun/vim-polyglot'
 Plug 'neomake/neomake'
 
 " Run Neomake when I save any buffer
-augroup localneomake
-  autocmd! BufWritePost * Neomake
-augroup END
+" augroup localneomake
+"   autocmd! BufWritePost * Neomake
+" augroup END
 " Don't tell me to use smartquotes in markdown ok?
 let g:neomake_markdown_enabled_makers = []
 " https://www.smoothterminal.com/articles/neovim-for-elixir
-let g:neomake_elixir_enabled_makers = ['mix', 'credo']
+let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'elixir']
 
 Plug 'Yggdroot/indentLine'
 " custom inconsolata font file with dotted lines.
@@ -77,20 +81,20 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Autocomplete with deoplete.
+" Autocomplete with deoplete. - GR MOVE TO COC
 " https://github.com/Shougo/deoplete.nvim/issues/550
-if has('macunix')
-  let g:python3_host_prog  = '/usr/local/Cellar/python3/3.7.0/bin/python3'
-endif
+" if has('macunix')
+"   let g:python3_host_prog  = '/usr/local/Cellar/python3/3.7.0/bin/python3'
+" endif
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
+" if has('nvim')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" else
+"   Plug 'Shougo/deoplete.nvim'
+"   Plug 'roxma/nvim-yarp'
+"   Plug 'roxma/vim-hug-neovim-rpc'
+" endif
+" let g:deoplete#enable_at_startup = 1
 
 Plug 'w0rp/ale'
 
@@ -109,6 +113,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Initialize plugin system
 call plug#end()
 
+call neomake#configure#automake('w')
 
 set shell=zsh
 
@@ -145,6 +150,63 @@ set list listchars=tab:»·,trail:·,nbsp:·
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
+
+""" COC
+"
+" Better display for messages
+set cmdheight=2
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+" always show signcolumns
+set signcolumn=yes
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+
+""" /COC
 
 """
 " STARTUP
@@ -300,4 +362,11 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 "Async run prettier
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue Prettier
+
+" hack workaround to get Phoenix live reload working:w
+let $MIX_ENV='editor'
+
+" Try this http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/
+" Ref: http://vimcasts.org/episodes/the-file-explorer/
+let NERDTreeHijackNetrw=1
 
