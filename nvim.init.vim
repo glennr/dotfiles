@@ -38,10 +38,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Autoformat .ex files
 Plug 'mhinz/vim-mix-format'
 let g:mix_format_on_save = 1
-"let g:mix_format_silent_errors = 1
-"
-" autoformat elixir files
-"autocmd BufWritePost *.exs,*.ex silent :!mix format %
+let g:mix_format_silent_errors = 1
+
 "
 "Plug 'sbdchd/neoformat'
 Plug 'sheerun/vim-polyglot'
@@ -49,12 +47,14 @@ Plug 'sheerun/vim-polyglot'
 " Execute code checks, find mistakes, in the background
 Plug 'neomake/neomake'
 
+Plug 'gabrielelana/vim-markdown'
+
 " Run Neomake when I save any buffer
 " augroup localneomake
 "   autocmd! BufWritePost * Neomake
 " augroup END
 " Don't tell me to use smartquotes in markdown ok?
-let g:neomake_markdown_enabled_makers = []
+" let g:neomake_markdown_enabled_makers = []
 " https://www.smoothterminal.com/articles/neovim-for-elixir
 let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'elixir']
 
@@ -96,7 +96,7 @@ Plug 'vim-airline/vim-airline-themes'
 " endif
 " let g:deoplete#enable_at_startup = 1
 
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 " Always load last!
 Plug 'ryanoasis/vim-devicons'
@@ -288,7 +288,6 @@ nnoremap <leader>w <C-w>v<C-w>l
 " Ale. Set this. Airline will handle the rest.
 let g:airline#extensions#ale#enabled = 1
 
-
 """
 " PRETTIER OVERRIDES
 """"
@@ -361,7 +360,11 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 "Async run prettier
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue Prettier
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue Prettier
+
+" Elixir /ERB support sucks in Prettier
+" This is much simpler and 99% correct https://coderwall.com/p/phy6cg/vim-auto-indent-on-save
+"autocmd BufWritePre *.eex :normal migg=G`i
 
 " hack workaround to get Phoenix live reload working:w
 let $MIX_ENV='editor'
@@ -369,4 +372,15 @@ let $MIX_ENV='editor'
 " Try this http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/
 " Ref: http://vimcasts.org/episodes/the-file-explorer/
 let NERDTreeHijackNetrw=1
+
+" autoformat elixir files
+" let g:ale_fix_on_save = 1
+" let g:ale_fixers = {}
+" let g:ale_fixers['elixir'] = ['mix_format']
+
+"augroup Elixir
+"  autocmd!
+"  "autocmd BufWritePre *.exs,*.ex silent :!mix format %
+"  autocmd BufWritePre *.exs,*.ex silent :!mix format %
+"augroup END
 
