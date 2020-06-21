@@ -144,11 +144,5 @@ if [[ `uname` == "Darwin" ]]; then
   eval "$(docker-machine env dinghy)"
 fi
 
-# Groove scripts
-export PATH="/home/g/src/groove/stack/bin:$PATH"
-export PATH="/home/g/src/groove/stack/script:$PATH"
-export PATH="/home/g/src/groove/stack/mobile-frontend/node_modules/.bin:$PATH"
-export PATH="/home/g/src/groove/stack/app/script:$PATH"
-
 source ~/.bin/tmuxinator.zsh
 

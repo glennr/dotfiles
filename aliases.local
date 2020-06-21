@@ -9,18 +9,6 @@ source ~/.alias_groups.local/annotate
 alias s='subl'
 alias s.='subl .'
 
-# groove docker
-alias e="cd ~/src/groove/stack/; ~/src/groove/stack/bin/exec"
-alias ea="e app"
-alias ear="ea bundle exec rspec"
-
-alias ew="e widget-frontend"
-alias em="e mobile-frontend"
-alias ewb="e widget-backend"
-alias ewbr="ewb bundle exec rspec"
-
-alias eds="ey deploy -e staging -R"
-
 #alias git=hub
 alias gprq="git pull-request"
 
@@ -29,8 +17,6 @@ alias gcot='git co -t origin/'
 alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
 alias st=stree
 
-alias cat=bat
+#alias cat=bat
 
-alias fe="cd ~/src/groove/stack/mobile-frontend;"
-alias api="cd ~/src/groove/stack/app"
-alias gql="cd ~/src/groove/stack/graphql-gateway"
+alias mk=microk8s.kubectl

@@ -47,16 +47,16 @@ Plug 'sheerun/vim-polyglot'
 " Execute code checks, find mistakes, in the background
 Plug 'neomake/neomake'
 
-Plug 'gabrielelana/vim-markdown'
+" Plug 'gabrielelana/vim-markdown'
 
-" Run Neomake when I save any buffer
-" augroup localneomake
-"   autocmd! BufWritePost * Neomake
-" augroup END
 " Don't tell me to use smartquotes in markdown ok?
 " let g:neomake_markdown_enabled_makers = []
 " https://www.smoothterminal.com/articles/neovim-for-elixir
 let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'elixir']
+" Run Neomake when I save any buffer
+"augroup localneomake
+autocmd! BufWritePost * Neomake
+"augroup END
 
 Plug 'Yggdroot/indentLine'
 " custom inconsolata font file with dotted lines.
@@ -364,7 +364,7 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 
 " Elixir /ERB support sucks in Prettier
 " This is much simpler and 99% correct https://coderwall.com/p/phy6cg/vim-auto-indent-on-save
-"autocmd BufWritePre *.eex :normal migg=G`i
+autocmd BufWritePre *.eex,*.leex :normal migg=G`i
 
 " hack workaround to get Phoenix live reload working:w
 let $MIX_ENV='editor'
