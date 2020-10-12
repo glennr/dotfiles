@@ -138,6 +138,7 @@ export PATH="$PATH:/path/to/elixir/bin"
 
 # Node
 export PATH="./node_modules/.bin:$PATH"
+export PATH="./assets/node_modules/.bin:$PATH"
 
 # Groove docker
 if [[ `uname` == "Darwin" ]]; then
@@ -145,4 +146,8 @@ if [[ `uname` == "Darwin" ]]; then
 fi
 
 source ~/.bin/tmuxinator.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
