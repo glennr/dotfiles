@@ -20,3 +20,5 @@ alias st=stree
 #alias cat=bat
 
 alias mk=microk8s.kubectl
+
+alias p=pulumi

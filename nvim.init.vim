@@ -35,6 +35,8 @@ Plug 'elixir-editors/vim-elixir' "moar popular
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " then :CocInstall coc-elixir
 
+Plug 'iamcco/coc-tailwindcss',  {'do': 'yarn install --frozen-lockfile && yarn run build'}
+
 " Autoformat .ex files
 Plug 'mhinz/vim-mix-format'
 let g:mix_format_on_save = 1
@@ -47,7 +49,9 @@ Plug 'sheerun/vim-polyglot'
 " Execute code checks, find mistakes, in the background
 Plug 'neomake/neomake'
 
-" Plug 'gabrielelana/vim-markdown'
+" Plug 'godlygeek/tabular'
+" Plug 'plasticboy/vim-markdown'
+let g:vim_markdown_conceal = 0
 
 " Don't tell me to use smartquotes in markdown ok?
 " let g:neomake_markdown_enabled_makers = []
@@ -98,9 +102,6 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'dense-analysis/ale'
 
-" Always load last!
-Plug 'ryanoasis/vim-devicons'
-
 " NERD Tree - tree explorer
 " https://github.com/scrooloose/nerdtree
 " http://usevim.com/2012/07/18/nerdtree/
@@ -109,6 +110,9 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " nerdtree-git-plugin - show git status in NERD Tree
 " https://github.com/Xuyuanp/nerdtree-git-plugin
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" Always load last!
+" Plug 'ryanoasis/vim-devicons'
 
 " Initialize plugin system
 call plug#end()
@@ -383,4 +387,5 @@ let NERDTreeHijackNetrw=1
 "  "autocmd BufWritePre *.exs,*.ex silent :!mix format %
 "  autocmd BufWritePre *.exs,*.ex silent :!mix format %
 "augroup END
+
 
