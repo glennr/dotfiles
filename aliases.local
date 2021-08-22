@@ -1,24 +1,6 @@
 
 source ~/.alias_groups.local/git-on-roids
-source ~/.alias_groups.local/heroku-on-roids
-
-# Railsy stuff
-source ~/.alias_groups.local/rails-on-roids
-source ~/.alias_groups.local/annotate
-
-alias s='subl'
-alias s.='subl .'
-
-#alias git=hub
-alias gprq="git pull-request"
-
-alias gcot='git co -t origin/'
-
-alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
-alias st=stree
 
 #alias cat=bat
-
-alias mk=microk8s.kubectl
 
 alias p=pulumi

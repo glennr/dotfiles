@@ -25,14 +25,6 @@ alias grh!='git reset --hard'
 alias gsp='git stash pop'
 alias gprune='git remote prune origin'
 
-#external git GUIs
-alias gk='gitk &'
-alias gx='gitx'
-
-alias gfp='git fetch prod'
-alias gfs='git fetch staging'
-alias gfa='gfs && gfp'
-
 alias grom='git rebase origin/master'
 alias griom='git rebase -i origin/master'
 alias gpom='git push origin master'
@@ -41,3 +33,5 @@ alias gppm='git push prod master:master'
 
 # cleanup merged branches
 alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
+
+alias gres='git restore --staged'

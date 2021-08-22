@@ -46,7 +46,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git history history-substring-search terminalapp)
+plugins=(git history history-substring-search terminalapp asdf)
 
 # User configuration
 
@@ -90,24 +90,12 @@ export PATH="$HOME/bin:$PATH"
 # Yarn binaries
 export PATH="$HOME/.yarn/bin:$PATH"
 
-# Golang 1.16 ubuntu install https://golang.org/doc/install
-export GOPATH=$HOME/go
-export PATH=/usr/local/go/bin:$GOPATH/bin:$PATH
-
 setopt hist_ignore_all_dups
 
 #FUCK YOU AUTOCORRECT
 unsetopt correct_all
 
 #PROMPT='%n@%m %{$fg_bold[magenta]%}%1~$(git_prompt_info) %{$fg_bold[magenta]%}%# %{$reset_color%}'
-
-#php kak
-#export PHPBIN=/usr/local/Cellar/php56/5.6.9/bin
-#export PATH=$PHPBIN:$PATH
-
-# haskellness
-#export PATH=~/Library/Haskell/bin:$PATH
-#export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 
 # bind UP and DOWN arrow keys
 zmodload zsh/terminfo
@@ -134,19 +122,15 @@ export PATH="$PATH:/path/to/elixir/bin"
 export PATH="./node_modules/.bin:$PATH"
 export PATH="./assets/node_modules/.bin:$PATH"
 
-# Groove docker
-if [[ `uname` == "Darwin" ]]; then
-  eval "$(docker-machine env dinghy)"
-fi
-
 source ~/.bin/tmuxinator.zsh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # asdf append completions to fpath
 fpath=(${ASDF_DIR}/completions $fpath)
+
 # initialise completions with ZSH's compinit
 autoload -Uz compinit
 compinit
