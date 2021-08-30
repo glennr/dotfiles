@@ -32,10 +32,12 @@ Plug 'prettier/vim-prettier', {
 " Plug 'slashmili/alchemist.vim'
 Plug 'elixir-editors/vim-elixir' "moar popular
 
+let g:coc_node_path='/home/g/.asdf/shims/node'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " then :CocInstall coc-elixir
 
-Plug 'iamcco/coc-tailwindcss',  {'do': 'yarn install --frozen-lockfile && yarn run build'}
+" moving to rustywind instead
+"Plug 'iamcco/coc-tailwindcss',  {'do': 'yarn install --frozen-lockfile && yarn run build'}
 
 " Autoformat .ex files
 Plug 'mhinz/vim-mix-format'
