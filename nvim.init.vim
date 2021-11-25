@@ -51,9 +51,18 @@ Plug 'sheerun/vim-polyglot'
 " Execute code checks, find mistakes, in the background
 Plug 'neomake/neomake'
 
+let g:neomake_javascript_local_eslint_maker = {
+        \ 'exe': getcwd().'/assets/node_modules/.bin/eslint',
+        \ 'args': ['-f', 'compact'],
+        \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+        \   '%W%f: line %l\, col %c\, Warning - %m,%-G,%-G%*\d problems%#'
+        \ }
+let g:neomake_javascript_enabled_makers = ['local_eslint']
+
 " Plug 'godlygeek/tabular'
 " Plug 'plasticboy/vim-markdown'
 let g:vim_markdown_conceal = 0
+
 
 " Don't tell me to use smartquotes in markdown ok?
 " let g:neomake_markdown_enabled_makers = []
