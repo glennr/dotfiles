@@ -379,7 +379,7 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 
 " Elixir /ERB support sucks in Prettier
 " This is much simpler and 99% correct https://coderwall.com/p/phy6cg/vim-auto-indent-on-save
-autocmd BufWritePre *.eex,*.leex :normal migg=G`i
+" autocmd BufWritePre *.eex,*.leex :normal migg=G`i
 
 " hack workaround to get Phoenix live reload working:w
 let $MIX_ENV='editor'
