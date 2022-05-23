@@ -65,9 +65,9 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
-# Launch nvim not vim.
-if type nvim > /dev/null 2>&1; then
-  alias vim='nvim'
+# Launch lvim not vim.
+if type lvim > /dev/null 2>&1; then
+  alias vim='lvim'
 fi
 
 # Compilation flags

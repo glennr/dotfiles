@@ -19,6 +19,11 @@ function! XTermPasteBegin()
   return ""
 endfunction
 
+UnPlug 'ale'
+augroup ale
+  autocmd!
+augroup END
+
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 "END https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
 

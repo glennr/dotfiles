@@ -4,3 +4,5 @@ source ~/.alias_groups.local/git-on-roids
 #alias cat=bat
 
 alias p=pulumi
+alias lv=lvim
+
