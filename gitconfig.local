@@ -10,6 +10,7 @@
 
 [alias]
     f = fetch
+    bd = !"git branch -D"
     lg = !"git lg1"
     lg1 = !"git lg1-specific --all"
     lg2 = !"git lg2-specific --all"
@@ -27,7 +28,6 @@
       git push "$@" \
         -o merge_request.create \
         -o merge_request.target=master \
-        -o ci.skip \
         -o merge_request.title=\"$MSG\"; \
     }; f"
 

@@ -122,6 +122,10 @@ export PATH="$PATH:$HOME/.pulumi/bin"
 export PATH="./node_modules/.bin:$PATH"
 export PATH="./assets/node_modules/.bin:$PATH"
 
+#fly.io
+export FLYCTL_INSTALL="/home/g/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
 source ~/.bin/tmuxinator.zsh
 
 # export NVM_DIR="$HOME/.nvm"
