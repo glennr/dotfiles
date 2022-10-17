@@ -208,6 +208,15 @@ lvim.plugins = {
   { "tpope/vim-fugitive" },
   { 'cloudhead/neovim-fuzzy' },
   { 'jremmen/vim-ripgrep' },
+  {
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && yarn install",
+    ft = "markdown",
+    config = function()
+      vim.g.mkdp_auto_start = 1
+    end,
+    opt = false,
+  }
 }
 
 -- Strip whitespace all files on save

@@ -24,7 +24,7 @@
 
     mrc = "!f() { \
       set -x; \
-      MSG=\"Draft: $(git show --format='%s' --no-patch)\"; \
+      MSG=\"$(git show --format='%s' --no-patch)\"; \
       git push "$@" \
         -o merge_request.create \
         -o merge_request.target=master \
