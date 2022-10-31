@@ -5,9 +5,6 @@
 	name = Glenn Roberts
 	email = me@glenn-roberts.com
 
-[url "git@github.com:"]
-	insteadOf = https://github.com/
-
 [alias]
     f = fetch
     bd = !"git branch -D"
