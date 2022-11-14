@@ -6,3 +6,4 @@ source ~/.alias_groups.local/git-on-roids
 alias p=pulumi
 alias lv=lvim
 
+alias k=kubectl

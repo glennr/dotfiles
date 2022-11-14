@@ -54,15 +54,15 @@ lvim.keys.normal_mode["<leader>a"] = ":Rg<space>"
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
--- }
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+Trouble",
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
+}
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -125,12 +125,16 @@ end, lvim.lsp.automatic_configuration.skipped_servers)
 -- end
 
 -- lvim.log.level = "debug"
--- lvim.lsp.null_ls.setup = {
---   -- debug = true,
---   log = {
---     level = "debug",
---   },
--- }
+local null_ls = require "null-ls"
+lvim.lsp.null_ls.setup = {
+  sources = {
+    null_ls.builtins.diagnostics.vale,
+  },
+  --   -- debug = true,
+  --   log = {
+  --     level = "debug",
+  --   },
+}
 
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
@@ -153,7 +157,7 @@ formatters.setup {
     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
     extra_args = { "--print-with", "100" },
     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-    filetypes = { "html", "javascript", "typescript", "typescriptreact" },
+    filetypes = { "html", "javascript", "typescript", "typescriptreact", "markdown" },
   },
 }
 
@@ -200,10 +204,19 @@ lvim.plugins = {
   --   end,
   -- }
   -- --     {"folke/tokyonight.nvim"},
-  --     {
-  --       "folke/trouble.nvim",
-  --       cmd = "TroubleToggle",
-  --     },
+  {
+    -- "folke/trouble.nvim",
+    -- cmd = "TroubleToggle",
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  },
   { "chaoren/vim-wordmotion" },
   { "tpope/vim-fugitive" },
   { 'cloudhead/neovim-fuzzy' },
