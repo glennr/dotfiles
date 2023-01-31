@@ -117,6 +117,7 @@ export PATH="/usr/local/sbin:$PATH"
 
 # Pulumi
 export PATH="$PATH:$HOME/.pulumi/bin"
+export PULUMI_SKIP_UPDATE_CHECK=true
 
 # Node
 export PATH="./node_modules/.bin:$PATH"
@@ -138,3 +139,10 @@ fpath=(${ASDF_DIR}/completions $fpath)
 # initialise completions with ZSH's compinit
 autoload -Uz compinit
 compinit
+
+export AWS_SESSION_TOKEN_TTL=4h
+export AWS_ASSUME_ROLE_TTL=4h
+
+# export XLA_TARGET=cuda118
+# export EXLA_TARGET=cuda
+# export LIBTORCH_TARGET=cuda

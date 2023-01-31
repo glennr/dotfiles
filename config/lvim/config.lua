@@ -34,6 +34,57 @@ lvim.keys.normal_mode["<C-p>"] = ":FuzzyOpen<CR>"
 -- noremap <leader>a :Rg<space>
 lvim.keys.normal_mode["<leader>a"] = ":Rg<space>"
 
+function _G.PasteImageFunction()
+  return vim.api.nvim_exec(
+    [[
+function! s:SaveFile() abort
+  let targets = filter(
+        \ systemlist('xclip -selection clipboard -t TARGETS -o | grep image\/'),
+        \ 'v:val =~# ''image''')
+  if empty(targets) | return | endif
+
+  let outdir = expand('%:p:h') . '/img'
+  if !isdirectory(outdir)
+    call mkdir(outdir)
+  endif
+
+  let mimetype = targets[0]
+  let extension = split(mimetype, '/')[-1]
+  let tmpfile = outdir . '/savefile_tmp.' . extension
+  call system(printf('xclip -selection clipboard -t %s -o > %s',
+        \ mimetype, tmpfile))
+
+  let cnt = 0
+  let filename = outdir . '/image' . cnt . '.' . extension
+  let relname = 'img/image' . cnt . '.' . extension
+  while filereadable(filename)
+    call system('diff ' . tmpfile . ' ' . filename)
+    if !v:shell_error
+      call delete(tmpfile)
+      break
+    endif
+
+    let cnt += 1
+    let filename = outdir . '/image' . cnt . '.' . extension
+    let relname = 'img/image' . cnt . '.' . extension
+  endwhile
+
+  if filereadable(tmpfile)
+    call rename(tmpfile, filename)
+  endif
+
+  let @* = '![](' . fnamemodify(relname, ':.') . ' "")'
+  normal! "*p
+endfunction
+
+call s:SaveFile()
+]]   ,
+    true)
+end
+
+-- https://souvikhaldar.medium.com/how-to-paste-screenshot-in-vim-buffer-on-ubuntu-bd9545abb39d
+lvim.keys.normal_mode["<leader>p"] = ":call v:lua.PasteImageFunction()"
+
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
 -- local _, actions = pcall(require, "telescope.actions")
