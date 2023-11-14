@@ -1,17 +1,105 @@
---[[
-lvim is the global options object
+-- Read the docs: https://www.lunarvim.org/docs/configuration
+-- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
+-- Forum: https://www.reddit.com/r/lunarvim/
+-- Discord: https://discord.com/invite/Xb9B4Ny
+--
+lvim.format_on_save = {
+  enabled = true,
+  -- pattern = "*.tex,*.bib",
+  timeout = 5000
+}
+-- increase timeout so mix format doesnt fail
+lvim.builtin.which_key.mappings["l"]["f"] = {
+  function()
+    require("lvim.lsp.utils").format { timeout_ms = 5000 }
+  end,
+  "Format",
+}
+lvim.lsp.null_ls.setup.timeout_ms = 5000
 
-Linters should be
-filled in as strings with either
-a global executable or a path to
-an executable
-]] -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
--- general
-lvim.log.level = "warn"
-lvim.format_on_save.enabled = true
-lvim.colorscheme = "onedarker"
--- to disable icons and use a minimalist setup, uncomment the following
--- lvim.use_icons = false
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { name = "mix", filetypes = { "elixir", "heex", "html-eex" } },
+  --   {
+  --     name = "prettier",
+  --     ---@usage arguments to pass to the formatter
+  --     -- these cannot contain whitespace
+  --     -- options such as `--line-width 80` become either `{"--line-width", "80"}` or `{"--line-width=80"}`
+  --     args = { "--print-width", "100" },
+  --     ---@usage only start in these filetypes, by default it will attach to all filetypes it supports
+  --     filetypes = { "typescript", "typescriptreact" },
+  --   },
+}
+
+-- set additional linters
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { name = "sqlfluff" },
+  { name = "credo" }
+  --   { command = "flake8", filetypes = { "python" } },
+  --   {
+  --     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+  --     command = "shellcheck",
+  --     ---@usage arguments to pass to the formatter
+  --     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+  --     extra_args = { "--severity", "warning" },
+  --   },
+  --   {
+  --     command = "codespell",
+  --     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+  --     filetypes = { "javascript", "python" },
+  --   },
+}
+
+
+lvim.builtin.treesitter.ensure_installed = {
+  "bash",
+  "c",
+  "elixir",
+  "javascript",
+  "json",
+  "lua",
+  "python",
+  "typescript",
+  "tsx",
+  "css",
+  "rust",
+  "java",
+  "yaml",
+}
+lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.highlight.enabled = true
+
+-- Additional Plugins
+lvim.plugins = {
+  {
+    -- "folke/trouble.nvim",
+    -- cmd = "TroubleToggle",
+    "folke/trouble.nvim",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  },
+  { "chaoren/vim-wordmotion" },
+  -- disabling this since I use the CLI mostly, and it interferes with gotot commands like g-d
+  --  { "tpope/vim-fugitive" },
+  { 'cloudhead/neovim-fuzzy' },
+  { 'jremmen/vim-ripgrep' },
+  {
+    "iamcco/markdown-preview.nvim",
+    build = "cd app && yarn install",
+    ft = "markdown",
+    config = function()
+      vim.g.mkdp_auto_start = 1
+    end,
+    lazy = false,
+  }
+}
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -33,74 +121,11 @@ lvim.keys.normal_mode["<C-p>"] = ":FuzzyOpen<CR>"
 -- noremap <leader>a :Rg<space>
 lvim.keys.normal_mode["<leader>a"] = ":Rg<space>"
 
-function _G.PasteImageFunction()
-  return vim.api.nvim_exec(
-    [[
-function! s:SaveFile() abort
-  let targets = filter(
-        \ systemlist('xclip -selection clipboard -t TARGETS -o | grep image\/'),
-        \ 'v:val =~# ''image''')
-  if empty(targets) | return | endif
-
-  let outdir = expand('%:p:h') . '/img'
-  if !isdirectory(outdir)
-    call mkdir(outdir)
-  endif
-
-  let mimetype = targets[0]
-  let extension = split(mimetype, '/')[-1]
-  let tmpfile = outdir . '/savefile_tmp.' . extension
-  call system(printf('xclip -selection clipboard -t %s -o > %s',
-        \ mimetype, tmpfile))
-
-  let cnt = 0
-  let filename = outdir . '/image' . cnt . '.' . extension
-  let relname = 'img/image' . cnt . '.' . extension
-  while filereadable(filename)
-    call system('diff ' . tmpfile . ' ' . filename)
-    if !v:shell_error
-      call delete(tmpfile)
-      break
-    endif
-
-    let cnt += 1
-    let filename = outdir . '/image' . cnt . '.' . extension
-    let relname = 'img/image' . cnt . '.' . extension
-  endwhile
-
-  if filereadable(tmpfile)
-    call rename(tmpfile, filename)
-  endif
-
-  let @* = '![](' . fnamemodify(relname, ':.') . ' "")'
-  normal! "*p
-endfunction
-
-call s:SaveFile()
-]]   ,
-    true)
-end
-
--- https://souvikhaldar.medium.com/how-to-paste-screenshot-in-vim-buffer-on-ubuntu-bd9545abb39d
-lvim.keys.normal_mode["<leader>p"] = ":call v:lua.PasteImageFunction()"
-
--- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
--- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
--- local _, actions = pcall(require, "telescope.actions")
--- lvim.builtin.telescope.defaults.mappings = {
---   -- for input mode
---   i = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---     ["<C-n>"] = actions.cycle_history_next,
---     ["<C-p>"] = actions.cycle_history_prev,
---   },
---   -- for normal mode
---   n = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---   },
--- }
+-- Strip whitespace all files on save
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*" },
+  command = [[%s/\s\+$//e]],
+})
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
@@ -113,182 +138,3 @@ lvim.builtin.which_key.mappings["t"] = {
   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
 }
-
--- TODO: User Config for predefined plugins
--- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.alpha.active = true
-lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.view.side = "left"
-
--- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "c",
-  "elixir",
-  "javascript",
-  "json",
-  "lua",
-  "python",
-  "typescript",
-  "tsx",
-  "css",
-  "rust",
-  "java",
-  "yaml",
-}
-
-lvim.builtin.treesitter.ignore_install = { "haskell"}
-lvim.builtin.treesitter.highlight.enabled = true
-
--- generic LSP settings
-
--- ---@usage disable automatic installation of servers
--- lvim.lsp.automatic_servers_installation = true
-lvim.lsp.installer.setup.automatic_installation = true
-
--- ---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
--- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
--- local opts = {} -- check the lspconfig documentation for a list of all possible options
--- require("lvim.lsp.manager").setup("pyright", opts)
-
-local opts = {} -- check the lspconfig documentation for a list of all possible options
-require("lvim.lsp.manager").setup("sqlls", opts)
-
--- ---remove a server from the skipped list, e.g. eslint, or emmet_ls.
--- !!Requires `:LvimCacheReset` to take effect!!
---`:LvimInfo` lists which
--- server(s) are skiipped for the current filetype
-vim.tbl_map(function(server)
-  return server ~= "tailwind"
-end, lvim.lsp.automatic_configuration.skipped_servers)
-
--- -- you can set a custom on_attach function that will be used for all the language servers
--- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
--- lvim.lsp.on_attach_callback = function(client, bufnr)
---   local function buf_set_option(...)
---     vim.api.nvim_buf_set_option(bufnr, ...)
---   end
---   --Enable completion triggered by <c-x><c-o>
---   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
--- end
-
-lvim.log.level = "debug"
-local null_ls = require "null-ls"
-lvim.lsp.null_ls.setup = {
-  sources = {
-    null_ls.builtins.diagnostics.vale,
-  },
-  -- debug = true,
-  log = {
-    level = "debug",
-  },
-}
-
--- -- set a formatter, this will override the language server formatting capabilities (if it exists)
-local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup {
-  { name = "sqlfluff" },
-  { name = "mix", filetypes = { "elixir", "heex", "html-eex" } },
-  { name = "rustywind", filetypes = { "heex", "html", "html-eex" } },
-  --{
-  --   name = "mix",
-  -- filetypes = { "elixir", "html-eex", "heex" },
-  -- in mix 1.14 we'll get this option, opening the door to a per-file format.
-  -- extra_args = { "--stdin-filename", "$FILENAME" }
-  -- }
-  --   { command = "black", filetypes = { "python" } },
-  --   { command = "isort", filetypes = { "python" } },
-  {
-    -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
-    command = "prettier",
-    ---@usage arguments to pass to the formatter
-    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-    extra_args = { "--print-with", "100" },
-    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-    filetypes = { "html", "javascript", "typescript", "typescriptreact", "markdown" },
-  },
-}
-
--- -- set additional linters
-local linters = require "lvim.lsp.null-ls.linters"
-linters.setup {
-  { name = "sqlfluff" },
-  --   { name = "credo" }
-  --   { command = "flake8", filetypes = { "python" } },
-  --   {
-  --     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
-  --     command = "shellcheck",
-  --     ---@usage arguments to pass to the formatter
-  --     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-  --     extra_args = { "--severity", "warning" },
-  --   },
-  --   {
-  --     command = "codespell",
-  --     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-  --     filetypes = { "javascript", "python" },
-  --   },
-}
-
--- Additional Plugins
-lvim.plugins = {
-  -- {
-  --   "camspiers/snap",
-  --   rocks = "fzy",
-  --   config = function()
-  --     local snap = require "snap"
-  --     local layout = snap.get("layout").bottom
-  --     local file = snap.config.file:with { consumer = "fzy", layout = layout }
-  --     local vimgrep = snap.config.vimgrep:with { layout = layout }
-  --     snap.register.command("find_files", file { producer = "ripgrep.file" })
-  --     snap.register.command("buffers", file { producer = "vim.buffer" })
-  --     snap.register.command("oldfiles", file { producer = "vim.oldfile" })
-  --     snap.register.command("live_grep", vimgrep {})
-  --     snap.maps {
-  --       { "<Leader><Leader>", snap.config.file { producer = "ripgrep.file" } },
-  --       { "<Leader>fb", snap.config.file { producer = "vim.buffer" } },
-  --       { "<Leader>fo", snap.config.file { producer = "vim.oldfile" } },
-  --       { "<Leader>ff", snap.config.vimgrep {} },
-  --     }
-  --   end,
-  -- }
-  -- --     {"folke/tokyonight.nvim"},
-  {
-    -- "folke/trouble.nvim",
-    -- cmd = "TroubleToggle",
-    "folke/trouble.nvim",
-    dependencies = "nvim-tree/nvim-web-devicons",
-    config = function()
-      require("trouble").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    end
-  },
-  { "chaoren/vim-wordmotion" },
-  { "tpope/vim-fugitive" },
-  { 'cloudhead/neovim-fuzzy' },
-  { 'jremmen/vim-ripgrep' },
-  {
-    "iamcco/markdown-preview.nvim",
-    build = "cd app && yarn install",
-    ft = "markdown",
-    config = function()
-      vim.g.mkdp_auto_start = 1
-    end,
-    lazy = false,
-  }
-}
-
--- Strip whitespace all files on save
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*" },
-  command = [[%s/\s\+$//e]],
-})
-
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
