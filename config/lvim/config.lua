@@ -98,8 +98,32 @@ lvim.plugins = {
       vim.g.mkdp_auto_start = 1
     end,
     lazy = false,
+  },
+  {
+    'laytan/tailwind-sorter.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-lua/plenary.nvim' },
+    build = 'cd formatter && npm i && npm run build',
+    config = true,
   }
 }
+
+require('tailwind-sorter').setup({
+  on_save_enabled = true, -- If `true`, automatically enables on save sorting.
+  on_save_pattern = {
+    '*.html',
+    '*.js',
+    '*.jsx',
+    '*.tsx',
+    '*.twig',
+    '*.hbs',
+    '*.php',
+    '*.ex',
+    '*.eex',
+    '*.heex',
+    '*.astro'
+  }, -- The file patterns to watch and sort.
+  node_path = 'node',
+})
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
