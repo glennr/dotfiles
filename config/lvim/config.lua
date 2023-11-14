@@ -20,15 +20,29 @@ lvim.lsp.null_ls.setup.timeout_ms = 5000
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { name = "mix", filetypes = { "elixir", "heex", "html-eex" } },
-  --   {
-  --     name = "prettier",
-  --     ---@usage arguments to pass to the formatter
-  --     -- these cannot contain whitespace
-  --     -- options such as `--line-width 80` become either `{"--line-width", "80"}` or `{"--line-width=80"}`
-  --     args = { "--print-width", "100" },
-  --     ---@usage only start in these filetypes, by default it will attach to all filetypes it supports
-  --     filetypes = { "typescript", "typescriptreact" },
-  --   },
+  {
+    name = "rustywind",
+    filetypes = {
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "vue",
+      "svelte",
+      "html", "elixir",
+      "heex",
+      "html-eex"
+    }
+  },
+  {
+    name = "prettier",
+    --     ---@usage arguments to pass to the formatter
+    --     -- these cannot contain whitespace
+    --     -- options such as `--line-width 80` become either `{"--line-width", "80"}` or `{"--line-width=80"}`
+    --     args = { "--print-width", "100" },
+    --     ---@usage only start in these filetypes, by default it will attach to all filetypes it supports
+    --     filetypes = { "typescript", "typescriptreact" },
+  },
 }
 
 -- set additional linters
@@ -106,6 +120,20 @@ lvim.plugins = {
     config = true,
   }
 }
+
+-- runs eslint --fix on save
+-- TODO: Use prettier_eslint instead?
+require 'lspconfig'.eslint.setup({
+  settings = {
+    packageManager = 'npm'
+  },
+  on_attach = function(_client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
+})
 
 require('tailwind-sorter').setup({
   on_save_enabled = true, -- If `true`, automatically enables on save sorting.
