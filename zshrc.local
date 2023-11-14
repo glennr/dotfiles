@@ -147,6 +147,7 @@ compinit
 
 export AWS_SESSION_TOKEN_TTL=4h
 export AWS_ASSUME_ROLE_TTL=4h
+source ~/.bin/tmuxinator.zsh
 
 source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 

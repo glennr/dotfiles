@@ -8,8 +8,7 @@ an executable
 ]] -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 -- general
 lvim.log.level = "warn"
---lvim.format_on_save = true
-lvim.format_on_save = { timeout = 5000 }
+lvim.format_on_save.enabled = true
 lvim.colorscheme = "onedarker"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
@@ -119,15 +118,14 @@ lvim.builtin.which_key.mappings["t"] = {
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
+  "elixir",
   "javascript",
   "json",
   "lua",
@@ -140,13 +138,14 @@ lvim.builtin.treesitter.ensure_installed = {
   "yaml",
 }
 
-lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.ignore_install = { "haskell"}
 lvim.builtin.treesitter.highlight.enabled = true
 
 -- generic LSP settings
 
 -- ---@usage disable automatic installation of servers
-lvim.lsp.automatic_servers_installation = true
+-- lvim.lsp.automatic_servers_installation = true
+lvim.lsp.installer.setup.automatic_installation = true
 
 -- ---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 -- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
@@ -175,16 +174,16 @@ end, lvim.lsp.automatic_configuration.skipped_servers)
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 -- end
 
--- lvim.log.level = "debug"
+lvim.log.level = "debug"
 local null_ls = require "null-ls"
 lvim.lsp.null_ls.setup = {
   sources = {
     null_ls.builtins.diagnostics.vale,
   },
-  --   -- debug = true,
-  --   log = {
-  --     level = "debug",
-  --   },
+  -- debug = true,
+  log = {
+    level = "debug",
+  },
 }
 
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
@@ -259,7 +258,7 @@ lvim.plugins = {
     -- "folke/trouble.nvim",
     -- cmd = "TroubleToggle",
     "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
       require("trouble").setup {
         -- your configuration comes here
@@ -274,12 +273,12 @@ lvim.plugins = {
   { 'jremmen/vim-ripgrep' },
   {
     "iamcco/markdown-preview.nvim",
-    run = "cd app && yarn install",
+    build = "cd app && yarn install",
     ft = "markdown",
     config = function()
       vim.g.mkdp_auto_start = 1
     end,
-    opt = false,
+    lazy = false,
   }
 }
 
