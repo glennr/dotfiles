@@ -1,4 +1,5 @@
 # Status
+alias ga='git add'
 alias gs='gst'
 alias gd='git diff'
 
@@ -8,7 +9,7 @@ alias gpo='git push -u origin '
 # Branch navigation
 alias gcom='git checkout master'
 ## Checkout master, and tidy up merged branches
-alias gcomm='gcom && gf && (grom &; gprune && gbclean;) &;
+alias gcomm='gcom && gf && (grom & gprune && gbclean &)'
 ## Show remote branches
 alias gbb="git for-each-ref --sort=committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'"
 
