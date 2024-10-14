@@ -1,0 +1,14 @@
+# fixes when using eza as alias for ls
+
+# Basic listing
+alias l='eza -lh --classify'                # Equivalent to `ls -lFh`
+alias la='eza -lah --classify'              # Equivalent to `ls -lAFh`
+alias lr='eza -ltRh --classify'             # Sorted by date, recursive, show type, human readable
+alias lt='eza -lth --classify'              # Long list, sorted by date, show type, human readable
+alias ll='eza -l'                           # Long list
+alias ldot='eza -ld .*'                     # List only hidden files/folders
+alias lS='eza -lh --classify --sort=size'   # Sorted by size
+alias lart='eza -1Ah --classify --sort=oldest'  # Long list, oldest first
+alias lrt='eza -1Ah --classify --sort=newest'   # Long list, newest first
+alias lsr='eza -lahR --classify'            # Recursive list of all files and directories
+alias lsn='eza -1'                          # Names of files and directories in a single column

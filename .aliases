@@ -1,4 +1,5 @@
 source ~/.alias_groups/common-aliases
+source ~/.alias_groups/common-aliases-eza-fix
 source ~/.alias_groups/git
 source ~/.alias_groups/git-on-roids
 

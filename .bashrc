@@ -10,3 +10,6 @@ eval "$(starship init bash)"
 source ~/.local/share/blesh/ble.sh
 
 [[ -f ~/.aliases ]] && source ~/.aliases
+
+export AWS_SESSION_TOKEN_TTL=4h
+export AWS_ASSUME_ROLE_TTL=4h
