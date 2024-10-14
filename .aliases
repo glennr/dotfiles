@@ -1,7 +1,7 @@
 source ~/.alias_groups/git
 source ~/.alias_groups/git-on-roids
 
-alias cat=bat
+alias cat=batcat
 alias k=kubectl
 alias lv=nvim
 alias p=pulumi
