@@ -1,14 +1,21 @@
+# Status
 alias gs='gst'
-alias gt='git tag'
 alias gd='git diff'
 
+# Pushing
 alias gpo='git push -u origin '
 
-# branch navigation
+# Branch navigation
 alias gcom='git checkout master'
+## Checkout master, and tidy up merged branches
+alias gcomm='gcom && gf && (grom &; gprune && gbclean;) &;
+## Show remote branches
 alias gbb="git for-each-ref --sort=committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'"
 
-#rebasing
+# Pretty log
+alias glgp='git log --stat -p'
+
+# Rebasing
 alias gpr='git pull --rebase'
 alias grab='git rebase --abort'
 alias gri='git rebase -i'
@@ -17,17 +24,19 @@ alias grs='git rebase --skip'
 alias gcoo='git checkout --ours'
 alias gcot='git checkout --theirs'
 
-#general tomfoolery
-alias gcam='git commit --amend'
-alias grh!='git reset --hard'
-alias gsp='git stash pop'
-alias gprune='git remote prune origin'
-
+# Master branch rebasing 
 alias grom='git rebase origin/master'
 alias griom='git rebase -i origin/master'
 alias gpom='git push origin master'
 alias gpsm='git push staging master:master'
 alias gppm='git push prod master:master'
+
+#general tomfoolery
+alias gcam='git commit --amend'
+alias grh!='git reset --hard'
+alias gsp='git stash pop'
+alias gprune='git remote prune origin'
+alias gt='git tag'
 
 # cleanup merged branches
 alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
