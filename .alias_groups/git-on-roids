@@ -1,0 +1,33 @@
+alias gs='gst'
+alias gt='git tag'
+alias gd='git diff'
+
+alias gpo='git push -u origin '
+
+# branch navigation
+alias gcom='git checkout master'
+alias gbb="git for-each-ref --sort=committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'"
+
+#rebasing
+alias gpr='git pull --rebase'
+alias grab='git rebase --abort'
+alias gri='git rebase -i'
+alias grc='git rebase --continue'
+alias grs='git rebase --skip'
+alias gcoo='git checkout --ours'
+alias gcot='git checkout --theirs'
+
+#general tomfoolery
+alias gcam='git commit --amend'
+alias grh!='git reset --hard'
+alias gsp='git stash pop'
+alias gprune='git remote prune origin'
+
+alias grom='git rebase origin/master'
+alias griom='git rebase -i origin/master'
+alias gpom='git push origin master'
+alias gpsm='git push staging master:master'
+alias gppm='git push prod master:master'
+
+# cleanup merged branches
+alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'

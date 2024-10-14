@@ -8,3 +8,5 @@ export SUDO_EDITOR="$EDITOR"
 eval "$(starship init bash)"
 
 source ~/.local/share/blesh/ble.sh
+
+[[ -f ~/.aliases ]] && source ~/.aliases
