@@ -1,0 +1,6 @@
+# Searching history in vi mode with j/k
+# https://github.com/akinomyoga/ble.sh/issues/130
+ble-bind -m vi_nmap -f k history-search-backward
+ble-bind -m vi_nmap -f j history-search-forward
+ble-bind -m nsearch -f k nsearch/backward
+ble-bind -m nsearch -f j nsearch/forward
