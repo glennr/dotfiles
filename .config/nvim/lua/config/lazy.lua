@@ -51,3 +51,10 @@ require("lazy").setup({
     },
   },
 })
+
+-- Add BufEnter Autocmd to change the working directory to the file's directory
+-- This helps when launching nvim via alt+3 in ~, and then getting mix errors after `:cd ~/src/brmbl/app`
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*",
+  command = "lcd %:p:h",
+})
