@@ -38,3 +38,5 @@
 	name = Glenn Roberts
 	email = me@glenn-roberts.com
 
+[push]
+	autoSetupRemote = true
