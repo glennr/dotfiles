@@ -194,4 +194,11 @@ return {
       },
     },
   },
+  {
+    "jremmen/vim-ripgrep",
+    cmd = { "Rg" },
+    keys = {
+      { "<leader>a", ":Rg<space>", desc = "Ripgrep Search" },
+    },
+  },
 }
