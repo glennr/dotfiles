@@ -38,6 +38,8 @@ alias grh!='git reset --hard'
 alias gsp='git stash pop'
 alias gprune='git remote prune origin'
 alias gt='git tag'
+alias gres='git restore --staged'
+alias gcp='git cherry-pick'
 
 # cleanup merged branches
 alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'

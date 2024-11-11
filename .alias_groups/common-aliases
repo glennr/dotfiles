@@ -15,7 +15,6 @@ alias lsr='ls -lARFh' # Recursive list of files and directories
 alias lsn='ls -1'     # A column contains names of files and directories
 
 # zsh ruined me
-alias ..='cd ..'                                                                                                                                                                                                       │
 alias ...='cd ../..'
 
 # grep aliases
