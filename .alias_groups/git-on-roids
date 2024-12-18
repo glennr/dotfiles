@@ -14,6 +14,7 @@ alias gcomm='gcom && gf && (grom & gprune && gbclean &)'
 alias gbb="git for-each-ref --sort=committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'"
 
 # Pretty log
+alias glg='git log --stat'
 alias glgp='git log --stat -p'
 
 # Rebasing
