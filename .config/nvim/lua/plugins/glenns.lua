@@ -9,4 +9,11 @@ return {
       },
     },
   },
+  {
+    "jremmen/vim-ripgrep",
+    lazy = false,
+    keys = {
+      { "<leader>a", ":Rg ", desc = "Ripgrep search" },
+    },
+  },
 }
