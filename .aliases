@@ -8,6 +8,7 @@ alias k=kubectl
 alias lv=nvim
 alias p=pulumi
 alias y=yadm
+alias python=python3
 
 # Drata fix on 24.04
 alias drata-agent="/opt/Drata\ Agent/drata-agent --no-sandbox"
