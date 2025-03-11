@@ -25,3 +25,9 @@ export HISTTIMEFORMAT="%F %T "     # Add timestamp to each history entry
 
 # Flush history after each command
 PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
+
+export PATH=~/.bin:$PATH
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/g/.lmstudio/bin"
+
