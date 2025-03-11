@@ -31,7 +31,11 @@
     "git log",
     "git diff",
     "git show",
-    "mix test"
+    "cd",
+    "grep",
+    "set",
+    "mix",
+    "export"
   ],
   "workbench.startupEditor": "none"
 }
