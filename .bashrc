@@ -1,5 +1,8 @@
+# Omakub default config
+# initalizes mise etc.
 source ~/.local/share/omakub/defaults/bash/rc
 
+# Override Omakub
 # Editor used by CLI
 export EDITOR="nvim"
 export SUDO_EDITOR="$EDITOR"
