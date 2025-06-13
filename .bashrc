@@ -34,3 +34,6 @@ export PATH=~/.bin:$PATH
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/home/g/.lmstudio/bin"
 
+# workaround for https://github.com/RooVetGit/Roo-Code/issues/1377
+# https://docs.roocode.com/troubleshooting/shell-integration/#steps-to-change-the-execution-policy
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash)"
