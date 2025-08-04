@@ -22,6 +22,8 @@ return {
         markdown = { "prettier" },
         graphql = { "prettier" },
         elixir = { "mix" },
+        -- Apply trim_whitespace to ALL file types
+        ["*"] = { "trim_whitespace" },
       },
       formatters = {
         prettier = {
