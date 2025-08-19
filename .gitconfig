@@ -20,6 +20,13 @@
         -o merge_request.target=master \
         -o merge_request.title=\"$MSG\"; \
     }; f"
+    prc = "!f() { \
+      set -x; \
+      TITLE=\"$(git show --format='%s' --no-patch)\"; \
+      BODY=\"$(git show --format='%b' --no-patch)\"; \
+      git push -u origin HEAD && \
+      gh pr create --title \"$TITLE\" --body \"$BODY\" --base main; \
+    }; f"
     st = status
 
 [color]

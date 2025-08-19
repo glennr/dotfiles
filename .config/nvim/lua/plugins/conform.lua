@@ -11,13 +11,15 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
         python = { "black" },
-        typescript = { "prettier" },
-        javascript = { "prettier" },
-        javascriptreact = { "prettier" },
-        typescriptreact = { "prettier" },
-        css = { "prettier" },
+        typescript = { "biome" },
+        javascript = { "biome" },
+        javascriptreact = { "biome" },
+        typescriptreact = { "biome" },
+        css = { "biome" },
+        json = { "biome" },
+        jsonc = { "biome" },
+        -- Keep prettier for formats biome doesn't support
         html = { "prettier" },
-        json = { "prettier" },
         yaml = { "prettier" },
         markdown = { "prettier" },
         graphql = { "prettier" },
@@ -26,9 +28,14 @@ return {
         ["*"] = { "trim_whitespace" },
       },
       formatters = {
+        biome = {
+          command = "biome",
+          args = { "check", "--write", "--unsafe", "--stdin-file-path", "$FILENAME" },
+        },
         prettier = {
           single_quote = true,
           jsx_single_quote = true,
+          prepend_args = { "--print-width", "999" },
         },
         injected = { options = { ignore_errors = true } },
       },
