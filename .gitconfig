@@ -25,7 +25,7 @@
       TITLE=\"$(git show --format='%s' --no-patch)\"; \
       BODY=\"$(git show --format='%b' --no-patch)\"; \
       git push -u origin HEAD && \
-      gh pr create --title \"$TITLE\" --body \"$BODY\" --base main; \
+      gh pr create --title \"$TITLE\" --body \"$BODY\" --base master; \
     }; f"
     st = status
 
