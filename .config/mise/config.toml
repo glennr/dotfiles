@@ -1,5 +1,4 @@
 [tools]
-biome = "2.2.0"
 elixir = "latest"
 erlang = "latest"
 go = "latest"

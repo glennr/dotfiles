@@ -17,7 +17,7 @@ source ~/.local/share/blesh/ble.sh
 export AWS_SESSION_TOKEN_TTL=4h
 export AWS_ASSUME_ROLE_TTL=4h
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Enable shared history between terminals
 shopt -s histappend                # Append to the history file, don't overwrite
