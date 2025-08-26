@@ -1,8 +1,8 @@
 [tools]
-node = "latest"
-go = "latest"
-erlang = "latest"
+biome = "2.2.0"
 elixir = "latest"
+erlang = "latest"
+go = "latest"
+node = "latest"
 python = "latest"
 uv = "latest"
-biome = "2.2.0"
