@@ -28,6 +28,7 @@
       gh pr create --title \"$TITLE\" --body \"$BODY\" --base master --assignee @me; \
     }; f"
     st = status
+	gone = !git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -p -I {} git branch -D {}
 
 [color]
 	ui = true
