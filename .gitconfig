@@ -30,12 +30,16 @@
     st = status
 	gone = !git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -p -I {} git branch -D {}
 	sync = "!f() { \
-		git fetch --all; \
+		git fetch --all 2>&1 | grep -v '^From'; \
 		for branch in $(git branch | sed 's/^..//'); do \
 			upstream=$(git rev-parse --abbrev-ref $branch@{u} 2>/dev/null); \
 			if [ -n \"$upstream\" ]; then \
-				echo \"Updating $branch to $upstream\"; \
-				git branch -f $branch $upstream; \
+				error=$(git branch -f $branch $upstream 2>&1); \
+				if [ $? -eq 0 ]; then \
+					printf \"\\033[32m✓\\033[0m %s\\n\" \"$branch\"; \
+				else \
+					printf \"\\033[31m✗\\033[0m %s: %s\\n\" \"$branch\" \"$error\"; \
+				fi; \
 			fi; \
 		done; \
 	}; f"
