@@ -29,6 +29,16 @@
     }; f"
     st = status
 	gone = !git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -p -I {} git branch -D {}
+	sync = "!f() { \
+		git fetch --all; \
+		for branch in $(git branch | sed 's/^..//'); do \
+			upstream=$(git rev-parse --abbrev-ref $branch@{u} 2>/dev/null); \
+			if [ -n \"$upstream\" ]; then \
+				echo \"Updating $branch to $upstream\"; \
+				git branch -f $branch $upstream; \
+			fi; \
+		done; \
+	}; f"
 
 [color]
 	ui = true
