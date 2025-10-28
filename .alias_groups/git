@@ -25,7 +25,7 @@ alias glog='git log --oneline --decorate'
 # Commit Aliases
 alias gc='git commit -v'
 alias gca='git commit -v -a'
-alias gcam='git commit -a -m'
+# alias gcam='git commit -a -m'
 alias gcm='git commit -m'
 
 # Stashing Aliases

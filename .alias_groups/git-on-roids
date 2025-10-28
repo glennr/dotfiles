@@ -36,7 +36,7 @@ alias gpsm='git push staging master:master'
 alias gppm='git push prod master:master'
 
 #general tomfoolery
-alias gcam='git commit --amend'
+alias gcam='git commit --amend -nv'
 alias grh!='git reset --hard'
 alias gsp='git stash pop'
 alias gprune='git remote prune origin'
