@@ -28,7 +28,7 @@
       gh pr create --title \"$TITLE\" --body \"$BODY\" --base master --assignee @me; \
     }; f"
     st = status
-	gone = !git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -p -I {} git branch -D {}
+	gone = !git branch -vv | grep ': gone]' | awk '{print ($1 == "+") ? $2 : $1}' | xargs -p -I {} git branch -D {}
 	sync = "!f() { \
 		git fetch --all 2>&1 | grep -v '^From'; \
 		for branch in $(git branch | sed 's/^..//'); do \
