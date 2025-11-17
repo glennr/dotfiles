@@ -31,6 +31,9 @@ PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
 
 export PATH=~/.bin:$PATH
 
+# Remap numpad Enter to regular Enter
+xmodmap ~/.Xmodmap 2>/dev/null
+
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/home/g/.lmstudio/bin"
 
