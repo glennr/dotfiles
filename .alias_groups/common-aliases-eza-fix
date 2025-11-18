@@ -1,5 +1,44 @@
 # fixes when using eza as alias for ls
 
+# Unalias ls first (set by omakub) so we can define a function
+unalias ls 2>/dev/null
+
+# Wrapper function to handle traditional ls flags with eza
+ls() {
+  local args=()
+  local sort_time=false
+  local reverse=false
+
+  # Parse arguments to detect -t and -r flags
+  for arg in "$@"; do
+    if [[ "$arg" =~ ^-[a-zA-Z]*t[a-zA-Z]*$ ]]; then
+      # Contains -t flag
+      sort_time=true
+      if [[ "$arg" =~ r ]]; then reverse=true; fi
+      # Keep other flags except t and r
+      local remaining=$(echo "$arg" | tr -d 'tr')
+      [[ "$remaining" != "-" ]] && args+=("$remaining")
+    elif [[ "$arg" == "-r" ]]; then
+      reverse=true
+    else
+      args+=("$arg")
+    fi
+  done
+
+  # Build eza command
+  local eza_args=("-lh" "--group-directories-first" "--icons")
+
+  if [[ "$sort_time" == true ]]; then
+    if [[ "$reverse" == true ]]; then
+      eza_args+=("--sort" "oldest")
+    else
+      eza_args+=("--sort" "newest")
+    fi
+  fi
+
+  command eza "${eza_args[@]}" "${args[@]}"
+}
+
 # Basic listing
 alias l='eza -lh --classify'                # Equivalent to `ls -lFh`
 alias la='eza -lah --classify'              # Equivalent to `ls -lAFh`
