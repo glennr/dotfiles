@@ -29,16 +29,16 @@ export HISTTIMEFORMAT="%F %T "     # Add timestamp to each history entry
 # Flush history after each command
 PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
 
-export PATH=~/.bin:$PATH
+export PATH=$HOME/.bin:$PATH
 
 # mise shims
-export PATH="$PATH:~/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 # Remap numpad Enter to regular Enter
 xmodmap ~/.Xmodmap 2>/dev/null
 
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:/home/g/.lmstudio/bin"
+export PATH="$PATH:$HOME/.lmstudio/bin"
 
 # workaround for https://github.com/RooVetGit/Roo-Code/issues/1377
 # https://docs.roocode.com/troubleshooting/shell-integration/#steps-to-change-the-execution-policy
