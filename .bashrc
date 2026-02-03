@@ -31,6 +31,9 @@ PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
 
 export PATH=~/.bin:$PATH
 
+# mise shims
+export PATH="$PATH:~/.local/bin"
+
 # Remap numpad Enter to regular Enter
 xmodmap ~/.Xmodmap 2>/dev/null
 
