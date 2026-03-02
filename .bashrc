@@ -34,6 +34,10 @@ export PATH=$HOME/.bin:$PATH
 # mise shims
 export PATH="$PATH:$HOME/.local/bin"
 
+# Suppress false-positive Claude Code boot warning (upstream bug:
+# https://github.com/anthropics/claude-code/issues/7600)
+export DISABLE_INSTALLATION_CHECKS=1
+
 # Remap numpad Enter to regular Enter
 xmodmap ~/.Xmodmap 2>/dev/null
 
@@ -78,3 +82,8 @@ zcwd() {
 
 # Override Omakub's cd='z' alias with zcwd
 alias cd='zcwd'
+
+# Auto-attach to main zellij session
+if [[ -z "$ZELLIJ" ]]; then
+  zellij attach -c main
+fi
