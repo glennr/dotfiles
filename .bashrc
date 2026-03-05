@@ -7,6 +7,15 @@ source ~/.local/share/omakub/defaults/bash/rc
 export EDITOR="nvim"
 export SUDO_EDITOR="$EDITOR"
 
+# Auto-attach to main zellij session (before heavy shell init)
+if [[ -z "$ZELLIJ" ]]; then
+  exec zellij attach -c main
+fi
+
+# Ensure LANG is set (avoids ble.sh warning inside zellij)
+: "${LANG:=en_US.UTF-8}"
+export LANG
+
 # Starship.rs powered prompt
 eval "$(starship init bash)"
 
