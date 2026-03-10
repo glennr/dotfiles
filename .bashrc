@@ -7,11 +7,6 @@ source ~/.local/share/omakub/defaults/bash/rc
 export EDITOR="nvim"
 export SUDO_EDITOR="$EDITOR"
 
-# Auto-attach to main zellij session (before heavy shell init)
-if [[ -z "$ZELLIJ" ]]; then
-  exec zellij attach -c main
-fi
-
 # Ensure LANG is set (avoids ble.sh warning inside zellij)
 : "${LANG:=en_US.UTF-8}"
 export LANG
@@ -91,8 +86,3 @@ zcwd() {
 
 # Override Omakub's cd='z' alias with zcwd
 alias cd='zcwd'
-
-# Auto-attach to main zellij session
-if [[ -z "$ZELLIJ" ]]; then
-  zellij attach -c main
-fi

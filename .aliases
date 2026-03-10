@@ -9,6 +9,7 @@ alias lv=nvim
 alias p=pulumi
 alias y=yadm
 alias python=python3
+alias zz='zellij attach -c main'
 
 # Drata fix on 24.04
 alias drata-agent="/opt/Drata\ Agent/drata-agent --no-sandbox"
