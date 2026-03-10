@@ -6,3 +6,13 @@ on_force_close "quit"
 session_serialization true
 serialize_pane_viewport true
 scrollback_lines_to_serialize 10000
+
+keybinds {
+  unbind "Ctrl o"
+  shared_except "session" "locked" {
+    bind "Ctrl y" { SwitchToMode "Session"; }
+  }
+  session {
+    bind "Ctrl y" { SwitchToMode "Normal"; }
+  }
+}
