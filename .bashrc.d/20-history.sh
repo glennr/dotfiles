@@ -1,4 +1,5 @@
 # Shared history across terminals
+shopt -s histappend
 HISTCONTROL=ignoredups
 HISTSIZE=50000
 HISTFILESIZE=100000

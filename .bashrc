@@ -11,7 +11,9 @@
 
 # All the default Omarchy aliases and functions
 # (don't mess with these directly, just overwrite them here!)
-source "$OMARCHY_PATH/default/bash/rc"
+if [[ -n ${OMARCHY_PATH:-} && -r "$OMARCHY_PATH/default/bash/rc" ]]; then
+  source "$OMARCHY_PATH/default/bash/rc"
+fi
 
 # Personal config. Numbered so ordering stays explicit: 50 must run after
 # Omarchy's rc but before 90 sources the aliases that shadow ga/gd.

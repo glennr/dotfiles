@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Runs after `yadm clone --bootstrap`.
+#
+# `yadm clone` only checks out tracked files that are missing from $HOME and
+# leaves existing files with different contents alone. Omarchy seeds some of
+# the same paths (tmux.conf for one), so the tracked versions have to be
+# checked out over the distro's copies explicitly.
+set -euo pipefail
+cd "$HOME"
+
+yadm restore --staged "$HOME"
+yadm checkout -- "$HOME"
+
+# yadm sets this on clone already. Assert it: the whole flow relies on it.
+yadm gitconfig status.showUntrackedFiles no
+
+echo "dotfiles deployed. Open a new shell; tmux installs its plugins on first start."

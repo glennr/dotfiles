@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Front door to the yadm repo whose work tree is $HOME.
+#
+# Never let git choose which files to add: `yadm add -A` or `yadm add <dir>`
+# sweeps in whatever the distro put next to your files. ~/.gitignore already
+# makes those a no-op, and this is the path that works.
+set -euo pipefail
+
+usage() {
+  cat <<'USAGE'
+usage: dotfiles <command> [args]
+
+  status          tracked files that changed (untracked are hidden by design)
+  add FILE...     start tracking files; regular files only, never directories
+  commit [args]   commit every tracked change (yadm commit -a), e.g. -m "msg"
+  diff [args]     unstaged changes to tracked files
+  log [args]      recent history
+  push | pull     sync with origin (pull rebases)
+  ls              list tracked files
+
+For anything else run yadm directly. Keep away from `yadm add -A`.
+USAGE
+}
+
+cmd=${1:-status}
+[[ $# -gt 0 ]] && shift
+
+case $cmd in
+  status | st) yadm status --short "$@" ;;
+  add)
+    [[ $# -gt 0 ]] || { echo "dotfiles add: name the files to track" >&2; exit 2; }
+    for f in "$@"; do
+      if [[ $f == -* ]]; then
+        echo "dotfiles add: takes file names, not flags ($f)" >&2; exit 2
+      elif [[ -d $f ]]; then
+        echo "dotfiles add: $f is a directory. Name the files inside it." >&2; exit 2
+      elif [[ ! -f $f ]]; then
+        echo "dotfiles add: $f is not a regular file" >&2; exit 2
+      fi
+    done
+    yadm add -f -- "$@"
+    yadm status --short -- "$@" ;;
+  commit | ci) yadm commit -a "$@" ;;
+  diff | d) yadm diff "$@" ;;
+  log | l) yadm log --oneline --decorate -n 20 "$@" ;;
+  push) yadm push "$@" ;;
+  pull) yadm pull --rebase "$@" ;;
+  ls) yadm ls-files "$@" ;;
+  help | -h | --help) usage ;;
+  *) echo "dotfiles: unknown command '$cmd'" >&2; usage >&2; exit 2 ;;
+esac

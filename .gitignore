@@ -1,0 +1,11 @@
+# Whitelist. yadm's work tree is $HOME, so a plain `yadm add -A` or
+# `yadm add .config/nvim` would sweep in whatever Omarchy ships next to these
+# files. Ignoring everything makes both a no-op, and adding a file becomes a
+# deliberate act: `dotfiles add <file>`, which passes -f. Tracked files are
+# unaffected, so edits still show in `dotfiles status` and land with
+# `dotfiles commit`.
+/*
+!/.gitignore
+
+# Directories that are entirely mine. New files here need no -f.
+!/.bashrc.d/
