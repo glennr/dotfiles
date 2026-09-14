@@ -1,88 +1,18 @@
-# Omakub default config
-# initalizes mise etc.
-source ~/.local/share/omakub/defaults/bash/rc
+# Omarchy environment (OMARCHY_PATH + PATH), needed even for non-interactive shells
+[[ -r /usr/share/omarchy/default/bash/env-bootstrap ]] && source /usr/share/omarchy/default/bash/env-bootstrap
 
-# Override Omakub
-# Editor used by CLI
-export EDITOR="nvim"
-export SUDO_EDITOR="$EDITOR"
+# Personal PATH entries, above the interactive guard so `bash -lc` and ssh
+# remote commands see them too
+[[ -d "$HOME/.bin" ]] && export PATH="$HOME/.bin:$PATH"
+[[ -d "$HOME/.lmstudio/bin" ]] && export PATH="$PATH:$HOME/.lmstudio/bin"
 
-# Ensure LANG is set (avoids ble.sh warning inside zellij)
-: "${LANG:=en_US.UTF-8}"
-export LANG
+# If not running interactively, don't do anything else (leave this above the rc source)
+[[ $- != *i* ]] && return
 
-# Starship.rs powered prompt
-eval "$(starship init bash)"
+# All the default Omarchy aliases and functions
+# (don't mess with these directly, just overwrite them here!)
+source "$OMARCHY_PATH/default/bash/rc"
 
-source ~/.local/share/blesh/ble.sh
-
-[[ -f ~/.aliases ]] && source ~/.aliases
-
-export AWS_SESSION_TOKEN_TTL=4h
-export AWS_ASSUME_ROLE_TTL=4h
-
-# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# Enable shared history between terminals
-shopt -s histappend                # Append to the history file, don't overwrite
-export HISTCONTROL=ignoredups      # Ignore duplicate commands in history
-export HISTSIZE=50000              # Set the history size
-export HISTFILESIZE=100000          # Set the history file size
-export HISTTIMEFORMAT="%F %T "     # Add timestamp to each history entry
-
-# Flush history after each command
-PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
-
-export PATH=$HOME/.bin:$PATH
-
-# mise shims
-export PATH="$PATH:$HOME/.local/bin"
-
-# Suppress false-positive Claude Code boot warning (upstream bug:
-# https://github.com/anthropics/claude-code/issues/7600)
-export DISABLE_INSTALLATION_CHECKS=1
-
-# Remap numpad Enter to regular Enter
-xmodmap ~/.Xmodmap 2>/dev/null
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:$HOME/.lmstudio/bin"
-
-# workaround for https://github.com/RooVetGit/Roo-Code/issues/1377
-# https://docs.roocode.com/troubleshooting/shell-integration/#steps-to-change-the-execution-policy
-[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path bash)"
-
-# Smart cd: prefer real paths, then zoxide (cwd-scoped, then global)
-zcwd() {
-  # No args: normal "cd" to $HOME
-  if [ $# -eq 0 ]; then
-    builtin cd || return
-    return
-  fi
-
-  # First, try normal cd behaviour (rel/abs paths, cd -, cd .., etc.)
-  if builtin cd "$@" 2>/dev/null; then
-    return
-  fi
-
-  # If that failed, try zoxide, scoped to current directory
-  local target
-
-  if target="$(zoxide query --cwd "$PWD" -- "$@" 2>/dev/null)"; then
-    builtin cd "$target" || return
-    return
-  fi
-
-  # Fall back to global zoxide ranking
-  if target="$(zoxide query -- "$@" 2>/dev/null)"; then
-    builtin cd "$target" || return
-    return
-  fi
-
-  # Nothing worked
-  printf 'cd: no such file or directory (and no zoxide match): %s\n' "$*" >&2
-  return 1
-}
-
-# Override Omakub's cd='z' alias with zcwd
-alias cd='zcwd'
+# Personal config. Numbered so ordering stays explicit: 50 must run after
+# Omarchy's rc but before 90 sources the aliases that shadow ga/gd.
+for f in ~/.bashrc.d/*.sh; do [[ -r $f ]] && source "$f"; done

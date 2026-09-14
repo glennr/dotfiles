@@ -1,4 +1,10 @@
 [tools]
+# Live on this machine via mise shims — removing these uninstalls the binaries.
+claude = "latest"
+codex = "latest"
+gh = "latest"
+
+# Not installed until `mise install`. erlang/elixir build from source.
 elixir = "latest"
 erlang = "latest"
 go = "latest"
@@ -6,3 +12,6 @@ node = "latest"
 prettier = "latest"
 python = "latest"
 uv = "latest"
+
+[settings.upgrade]
+auto_prune = false

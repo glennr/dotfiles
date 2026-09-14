@@ -1,66 +1,25 @@
 [alias]
-    bd = !"git branch -D"
-    br = branch
-    ci = commit
-    co = checkout
-    f = fetch
-    lg = !"git lg1"
-    lg1 = !"git lg1-specific --all"
-    lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
-    lg2 = !"git lg2-specific --all"
-    lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
-    lg3 = !"git lg3-specific --all"
-    lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
-    mwps = push -o merge_request.create -o merge_request.target=master -o merge_request.merge_when_pipeline_succeeds
-    mrc = "!f() { \
-      set -x; \
-      MSG=\"$(git show --format='%s' --no-patch)\"; \
-      git push "$@" \
-        -o merge_request.create \
-        -o merge_request.target=master \
-        -o merge_request.title=\"$MSG\"; \
-    }; f"
-    prc = "!f() { \
-      set -x; \
-      TITLE=\"$(git show --format='%s' --no-patch)\"; \
-      BODY=\"$(git show --format='%b' --no-patch)\"; \
-      git push -u \"$@\" HEAD && \
-      gh pr create --title \"$TITLE\" --body \"$BODY\" --base master --assignee @me; \
-    }; f"
-    st = status
-	gone = !git branch -vv | grep ': gone]' | awk '{print ($1 == "+") ? $2 : $1}' | xargs -p -I {} git branch -D {}
-	sync = "!f() { \
-		git fetch --all 2>&1 | grep -v '^From'; \
-		for branch in $(git branch | sed 's/^..//'); do \
-			upstream=$(git rev-parse --abbrev-ref $branch@{u} 2>/dev/null); \
-			if [ -n \"$upstream\" ]; then \
-				error=$(git branch -f $branch $upstream 2>&1); \
-				if [ $? -eq 0 ]; then \
-					printf \"\\033[32m✓\\033[0m %s\\n\" \"$branch\"; \
-				else \
-					printf \"\\033[31m✗\\033[0m %s: %s\\n\" \"$branch\" \"$error\"; \
-				fi; \
-			fi; \
-		done; \
-	}; f"
-
+	bd = !git branch -D
+	f = fetch
+	gone = !git branch -vv | grep ': gone]' | awk '{print ($1 == \"+\") ? $2 : $1}' | xargs -p -I {} git branch -D {}
+	lg = !git lg1
+	lg1 = !git lg1-specific --all
+	lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+	lg2 = !git lg2-specific --all
+	lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+	lg3 = !git lg3-specific --all
+	lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+	mrc = "!f() { set -x; MSG=\"$(git show --format='%s' --no-patch)\"; git push \"$@\" -o merge_request.create -o merge_request.target=master -o merge_request.title=\"$MSG\"; }; f"
+	mwps = push -o merge_request.create -o merge_request.target=master -o merge_request.merge_when_pipeline_succeeds
+	prc = "!f() {       set -x;       TITLE=\"$(git show --format='%s' --no-patch)\";       BODY=\"$(git show --format='%b' --no-patch)\";       git push -u \"$@\" HEAD &&       gh pr create --title \"$TITLE\" --body \"$BODY\" --base master --assignee @me;     }; f"
+	sync = "!f() { \t\tgit fetch --all 2>&1 | grep -v '^From'; \t\tfor branch in $(git branch | sed 's/^..//'); do \t\t\tupstream=$(git rev-parse --abbrev-ref $branch@{u} 2>/dev/null); \t\t\tif [ -n \"$upstream\" ]; then \t\t\t\terror=$(git branch -f $branch $upstream 2>&1); \t\t\t\tif [ $? -eq 0 ]; then \t\t\t\t\tprintf \"\\033[32m✓\\033[0m %s\\n\" \"$branch\"; \t\t\t\telse \t\t\t\t\tprintf \"\\033[31m✗\\033[0m %s: %s\\n\" \"$branch\" \"$error\"; \t\t\t\tfi; \t\t\tfi; \t\tdone; \t}; f"
 [color]
 	ui = true
-
 [filter "lfs"]
 	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-
-[pull]
-	rebase = true
-
-[push]
-  autoSetupRemote = true
-
+	smudge = git-lfs smudge -- %f
 [user]
+	email = g@glenn-roberts.com
 	name = Glenn Roberts
-	email = me@glenn-roberts.com
-[credential]
-	helper = store
