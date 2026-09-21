@@ -1,8 +1,9 @@
 # Readline settings, tracked so they survive a distro hop. On Omarchy this
-# duplicates /usr/share/omarchy/default/bash/inputrc, which bash re-applies
-# via `bind -f` after readline has read this file; the two agree.
+# includes the defaults from /usr/share/omarchy/default/bash/inputrc, which
+# bash re-applies via `bind -f` after readline has read this file.
 # A ~/.inputrc replaces /etc/inputrc entirely, so pull that in first.
 $include /etc/inputrc
+set editing-mode vi
 
 set meta-flag on
 set input-meta on
@@ -41,3 +42,15 @@ TAB: menu-complete
 "\e[Z": menu-complete-backward
 # On first Tab, complete the common prefix before cycling candidates
 set menu-complete-display-prefix on
+
+# Restore the vi-mode history search from the old .blerc.
+# In command mode (Esc), k/j search history using the prefix before the cursor.
+set keymap vi-command
+"k": history-search-backward
+"j": history-search-forward
+# Restore the active keymap without changing the preferred editing mode.
+$if mode=vi
+set keymap vi-insert
+$else
+set keymap emacs-standard
+$endif

@@ -4,6 +4,14 @@ These dotfiles use `yadm` and target a Bash-based Linux desktop. They work on
 Ubuntu and other distributions, but they include optional integration with the
 packages on my current system. Read the assumptions before you install them.
 
+## Features
+
+- Modular Bash initialization for the editor, history, Git, and common commands.
+- Git aliases and worktree helpers 
+- A tmux configuration that installs plugins and restores saved sessions.
+- Neovim, VS Code, mise, Git, and readline configuration.
+- The `df` command for safe, routine dotfile management.
+
 ## Install
 
 Install `yadm` with your distribution package manager:
