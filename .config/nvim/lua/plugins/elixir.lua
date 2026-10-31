@@ -14,4 +14,18 @@ return {
       },
     },
   },
+
+  -- :A jumps between lib/x.ex and test/x_test.exs in any Mix project.
+  {
+    "tpope/vim-projectionist",
+    lazy = false,
+    init = function()
+      vim.g.projectionist_heuristics = {
+        ["mix.exs"] = {
+          ["lib/*.ex"] = { type = "source", alternate = "test/{}_test.exs" },
+          ["test/*_test.exs"] = { type = "test", alternate = "lib/{}.ex" },
+        },
+      }
+    end,
+  },
 }

@@ -6,6 +6,8 @@ return {
   { import = "lazyvim.plugins.extras.lang.typescript" },
 
   { "chaoren/vim-wordmotion" },
+  -- Show the parameters of the call you're typing.
+  { "saghen/blink.cmp", opts = { signature = { enabled = true } } },
   {
     "nvim-neo-tree/neo-tree.nvim",
 
